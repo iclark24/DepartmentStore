@@ -1,39 +1,51 @@
 import React from "react";
 import axios from "axios";
-import {Button, Form, Segment, Header} from "semantic-ui-react"
+import {Button, Form, Segment, Header, } from "semantic-ui-react"
 
 class ItemForm extends React.Component {
   state = { name: "", price: "", description: ""};
 
-  // componentDidMount() {
-  //   const { id } = this.props.match.params;
-  //   if (id)
-  //     axios.get(`/api/Departments/${id}`)
-  //       .then( res => {
-  //         const { name }= res.data;
-  //         this.setState({ name });
-  //       })
-  // }
+  componentDidMount() {
+    const { id, name, price, description} = this.props;
+    if (id){
+      this.setState({ name: name, price: price, description: description });
+    }
+  }
 
   handleChange = (e) => {
     const { target: { name, value, } } = e;
     this.setState({ [name]: value, });
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-      axios.post(`/api/departments/${this.props.match.params.id}/items`, this.state)
+    handleSubmit = (e) => {
+      e.preventDefault();
+      const item = { ...this.state };
+      const { id, department_id } = this.props;
+      if (id) {
+        axios.put(`/api/items/${id}`, item )
+          .then( res => {
+            this.setState({ name: "", price: "", description: "", });
+            this.props.toggleEdit()
+            this.props.handleEdit(department_id)
+          })
+      } else {
+        axios.post(`/api/departments/${this.props.match.params.id}/items`, this.state)
         .then( res => {
           this.props.history.push(`/departments/${this.props.match.params.id}`)
-        })
+          })
+      }
     }
 
   render() {
     const { name, price, description } = this.state;
     return (
       <Segment padded>
-        <Header>New Item</Header>
-        <Form onSubmit={this.handleSubmit}>
+        {this.props.id?
+          <Header>Edit Item</Header>
+          :
+          <Header>New Item</Header>
+        }     
+         <Form onSubmit={this.handleSubmit}>
           <Form.Input
             name="name"
             placeholder="Name"

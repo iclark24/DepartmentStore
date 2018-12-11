@@ -1,15 +1,19 @@
 import React from "react"
-import {Segment, Header, Button, Icon, Grid} from "semantic-ui-react"
+import {Segment, Header, Button, Icon, Grid, Item} from "semantic-ui-react"
 import axios from "axios"
 import { Link, } from "react-router-dom";
+import ItemForm from "./ItemForm"
 
 
 class Department extends React.Component {
 
   state = { 
     items: [],
+    editing: false,
   
   }
+
+  toggleEdit = () => this.setState({ editing: !this.state.editing, })
 
   handleDelete = (id) => {
     axios.delete(`/api/items/${id}`)
@@ -18,6 +22,16 @@ class Department extends React.Component {
         this.setState({ items: items.filter(m => m.id !== id )})
       })
   }
+
+  handleEdit = (id) => {
+    axios.get(`/api/departments/${id}`)
+    .then( res => {
+      this.setState({ departments: res.data, });
+    })
+    .catch( err => {
+      console.log(err);
+    })
+}
 
   componentDidMount() {
     const { id, } = this.props.match.params
@@ -35,14 +49,17 @@ class Department extends React.Component {
       <Grid.Column>
         <Segment textAlign="center">
           <Segment basic style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <Button icon size="mini" color="orange" onClick={() => this.handleEdit(i.id)}>
+            <Button icon size="mini" color="orange" onClick={() => this.toggleEdit()}>
               <Icon name="pencil"/>
             </Button>
             <Button icon size="mini" color="red" onClick={() => this.handleDelete(i.id)}>
               <Icon name="trash"/>
             </Button>
           </Segment>
-          <Link to={`/items/${i.id}`}>
+            {this.state.editing?
+              <ItemForm {...i} toggleEdit={this.toggleEdit} handleEdit={this.handleEdit}/>
+            :
+            <Segment basic>
             <Header>{i.name}</Header>
             <Segment basic>
               ${i.price}
@@ -50,11 +67,9 @@ class Department extends React.Component {
               <br/>
               {i.description}
             </Segment>
-          </Link>
+            </Segment>
+            }
         </Segment>
-
-
-
       </Grid.Column>
     )
     )
