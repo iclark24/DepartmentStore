@@ -1,20 +1,14 @@
 import React from "react"
-import {Segment, Header, Button, Icon, Grid} from "semantic-ui-react"
+import { Button, Icon, Grid} from "semantic-ui-react"
 import axios from "axios"
 import { Link, } from "react-router-dom";
-import DepartmentForm from "./DepartmentForm";
-import {StyledSegment, StyledGrid} from "./styles/main"
-
+import Department from "./Department"
 
 class Departments extends React.Component {
 
   state = { 
-    departments: [],
-    editing: false,
-  
+    departments: [],  
   }
-
-  toggleEdit = () => this.setState({ editing: !this.state.editing, })
 
   handleDelete = (id) => {
     axios.delete(`/api/departments/${id}`)
@@ -47,26 +41,7 @@ class Departments extends React.Component {
 
   renderDepartments = () => {
     return this.state.departments.map( d => (
-      <StyledGrid>
-        <StyledSegment textAlign="center">
-          <Segment basic style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <Button icon size="mini" color="orange" onClick={() => this.toggleEdit()}>
-              <Icon name="pencil"/>
-            </Button>
-            <Button icon size="mini" color="red" onClick={() => this.handleDelete(d.id)}>
-              <Icon name="trash"/>
-            </Button>
-          </Segment>
-
-          {this.state.editing?
-              <DepartmentForm {...d} toggleEdit={this.toggleEdit} handleEdit={this.handleEdit}/>
-            :
-            <Link to={`/departments/${d.id}`}>
-              <Header style={{ paddingBottom:"70px"}}>{d.name}</Header>
-            </Link>
-          }
-        </StyledSegment>
-      </StyledGrid>
+      <Department {...d} handleedit={this.handleEdit} handledelete={this.handleDelete}/>
     )
     )
   }

@@ -1,11 +1,9 @@
 import React from "react"
 import {Segment, Header, Button, Icon, Grid} from "semantic-ui-react"
-import { Link, } from "react-router-dom";
-import DepartmentForm from "./DepartmentForm";
-import {StyledSegment, StyledGrid, Segment2} from "./styles/main"
+import {StyledSegment, StyledGrid} from "./styles/main"
+import ItemForm from "./ItemForm"
 
-
-class Department extends React.Component {
+class Item extends React.Component {
 
   state = {
     editing: false,
@@ -14,7 +12,7 @@ class Department extends React.Component {
   toggleEdit = () => this.setState({ editing: !this.state.editing, })
 
   render() {
-    const {id, name, handleedit, handledelete, } = this.props
+    const {id, name, price, description, handleedit, handledelete, } = this.props
     return (
       <StyledGrid>
         <StyledSegment textAlign="center">
@@ -27,13 +25,17 @@ class Department extends React.Component {
             </Button>
           </Segment>
             {this.state.editing?
-              <DepartmentForm {...this.props} toggleEdit={this.toggleEdit} handleEdit={handleedit}/>
+              <ItemForm {...this.props} toggleEdit={this.toggleEdit} handleEdit={handleedit}/>
             :
-            <Link to={`/departments/${id}`}>
-              <Segment2 basic>
-                <Header>{name}</Header>
-              </Segment2>
-            </Link>
+            <Segment basic>
+            <Header>{name}</Header>
+            <Segment basic>
+              ${price}
+              <br/>
+              <br/>
+              {description}
+            </Segment>
+            </Segment>
             }
         </StyledSegment>
       </StyledGrid>
@@ -42,4 +44,4 @@ class Department extends React.Component {
 
 }
 
-export default Department
+export default Item
