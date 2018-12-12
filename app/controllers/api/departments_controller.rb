@@ -6,7 +6,7 @@ class Api::DepartmentsController < ApplicationController
   end
 
   def show
-    render json: @department.items.all
+    render json: [@department.items.all, @department]
   end
 
   def create

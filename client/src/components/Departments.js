@@ -3,6 +3,7 @@ import {Segment, Header, Button, Icon, Grid} from "semantic-ui-react"
 import axios from "axios"
 import { Link, } from "react-router-dom";
 import DepartmentForm from "./DepartmentForm";
+import {StyledSegment, StyledGrid} from "./styles/main"
 
 
 class Departments extends React.Component {
@@ -46,8 +47,8 @@ class Departments extends React.Component {
 
   renderDepartments = () => {
     return this.state.departments.map( d => (
-      <Grid.Column>
-        <Segment textAlign="center">
+      <StyledGrid>
+        <StyledSegment textAlign="center">
           <Segment basic style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <Button icon size="mini" color="orange" onClick={() => this.toggleEdit()}>
               <Icon name="pencil"/>
@@ -64,8 +65,8 @@ class Departments extends React.Component {
               <Header style={{ paddingBottom:"70px"}}>{d.name}</Header>
             </Link>
           }
-        </Segment>
-      </Grid.Column>
+        </StyledSegment>
+      </StyledGrid>
     )
     )
   }
@@ -78,7 +79,7 @@ class Departments extends React.Component {
             <Icon name="plus"/>New Department
           </Button>
         </Link>
-        <Grid columns={4} centered>
+        <Grid columns={3} centered>
             {this.renderDepartments()}
         </Grid>
       </div>

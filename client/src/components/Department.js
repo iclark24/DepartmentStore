@@ -1,14 +1,15 @@
 import React from "react"
-import {Segment, Header, Button, Icon, Grid, Item} from "semantic-ui-react"
+import {Segment, Header, Button, Icon, Grid} from "semantic-ui-react"
 import axios from "axios"
 import { Link, } from "react-router-dom";
-import ItemForm from "./ItemForm"
+import DepartmentForm from "./DepartmentForm";
+import {StyledSegment, StyledGrid} from "./styles/main"
 
 
 class Department extends React.Component {
 
   state = { 
-    items: [],
+    department: [],
     editing: false,
   
   }
@@ -16,15 +17,15 @@ class Department extends React.Component {
   toggleEdit = () => this.setState({ editing: !this.state.editing, })
 
   handleDelete = (id) => {
-    axios.delete(`/api/items/${id}`)
+    axios.delete(`/api/departments/${id}`)
       .then( res => {
-        const {items} = this.state;
-        this.setState({ items: items.filter(m => m.id !== id )})
+        const {departments} = this.state;
+        this.setState({ departments: departments.filter(m => m.id !== id )})
       })
   }
 
-  handleEdit = (id) => {
-    axios.get(`/api/departments/${id}`)
+  handleEdit = () => {
+    axios.get("/api/departments")
     .then( res => {
       this.setState({ departments: res.data, });
     })
@@ -33,63 +34,33 @@ class Department extends React.Component {
     })
 }
 
+
   componentDidMount() {
-    const { id, } = this.props.match.params
-    axios.get(`/api/departments/${id}`)
-      .then( res => {
-        this.setState({ items: res.data, });
-      })
-      .catch( err => {
-        console.log(err);
-      })
+    this.setState({ department: {...this.props} });
   }
 
-  renderItems = () => {
-    return this.state.items.map( i => (
-      <Grid.Column>
-        <Segment textAlign="center">
+  render() {
+    return (
+      <StyledGrid>
+        <StyledSegment textAlign="center">
           <Segment basic style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
             <Button icon size="mini" color="orange" onClick={() => this.toggleEdit()}>
               <Icon name="pencil"/>
             </Button>
-            <Button icon size="mini" color="red" onClick={() => this.handleDelete(i.id)}>
+            <Button icon size="mini" color="red" onClick={() => this.handleDelete(d.id)}>
               <Icon name="trash"/>
             </Button>
           </Segment>
-            {this.state.editing?
-              <ItemForm {...i} toggleEdit={this.toggleEdit} handleEdit={this.handleEdit}/>
+
+          {this.state.editing?
+              <DepartmentForm {...d} toggleEdit={this.toggleEdit} handleEdit={this.handleEdit}/>
             :
-            <Segment basic>
-            <Header>{i.name}</Header>
-            <Segment basic>
-              ${i.price}
-              <br/>
-              <br/>
-              {i.description}
-            </Segment>
-            </Segment>
-            }
-        </Segment>
-      </Grid.Column>
-    )
-    )
-  }
-
-  render() {
-    const { id, } = this.props.match.params
-    return(
-      <div>
-        <Link to={`/departments/${id}/items/new`}>
-          <Button style={{ marginBottom: "30px"}} color="blue">
-            <Icon name="plus"/>New Item
-          </Button>
-        </Link>
-        <Grid columns={5} centered>
-            {this.renderItems()}
-        </Grid>
-      </div>
-
-
+            <Link to={`/departments/${d.id}`}>
+              <Header style={{ paddingBottom:"70px"}}>{d.name}</Header>
+            </Link>
+          }
+        </StyledSegment>
+      </StyledGrid>
     )
   }
 
