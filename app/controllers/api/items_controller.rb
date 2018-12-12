@@ -1,6 +1,6 @@
 class Api::ItemsController < ApplicationController
   before_action :set_item, only: [:show, :update, :destroy]
-  before_action :set_department, except: [:destroy, :update]
+  before_action :set_department, only: [:create]
 
 
   # def index
@@ -8,7 +8,7 @@ class Api::ItemsController < ApplicationController
   # end
 
   def show
-    render json: @item
+    render json: [@item.comments.all, @item]
   end
 
   def create

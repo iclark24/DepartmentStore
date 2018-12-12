@@ -9,6 +9,8 @@ import DepartmentForm from "./components/DepartmentForm"
 import Items from "./components/Items"
 import ItemForm from "./components/ItemForm"
 import {Container} from "semantic-ui-react"
+import Comments from "./components/Comments"
+import CommentForm from "./components/CommentForm"
 // import Products from './components/Products';
 
 
@@ -23,6 +25,8 @@ const App = () => (
         <Route exact path="/departments/new" component={DepartmentForm}/>
         <Route exact path="/departments/:id" component={Items}/>
         <Route exact path="/departments/:id/items/new" component={ItemForm}/>
+        <Route exact path="/items/:id" component={Comments} />
+        <Route exact path="/items/:id/comments/new" component={CommentForm} />
         <Route component={NoMatch} />
       </Switch>
     </Container>

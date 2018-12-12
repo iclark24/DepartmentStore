@@ -1,10 +1,9 @@
 import React from "react"
 import {Segment, Header, Button, Icon,} from "semantic-ui-react"
-import { Link, } from "react-router-dom";
 import {StyledSegment, StyledGrid} from "./styles/main"
-import ItemForm from "./ItemForm"
+import CommentForm from "./CommentForm"
 
-class Item extends React.Component {
+class Comment extends React.Component {
 
   state = {
     editing: false,
@@ -13,11 +12,11 @@ class Item extends React.Component {
   toggleEdit = () => this.setState({ editing: !this.state.editing, })
 
   render() {
-    const {id, name, price, description, handleedit, handledelete, } = this.props
+    const {id, title, body, rating, handleedit, handledelete, } = this.props
     return (
       <StyledGrid>
         <StyledSegment textAlign="center">
-          <Segment basic style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <Segment basic style={{ display: "flex", alignComments: "center", justifyContent: "space-between" }}>
             <Button icon size="mini" color="orange" onClick={() => this.toggleEdit()}>
               <Icon name="pencil"/>
             </Button>
@@ -26,19 +25,17 @@ class Item extends React.Component {
             </Button>
           </Segment>
             {this.state.editing?
-              <ItemForm {...this.props} toggleEdit={this.toggleEdit} handleEdit={handleedit}/>
+              <CommentForm {...this.props} toggleEdit={this.toggleEdit} handleEdit={handleedit}/>
             :
-            <Link to={`/items/${id}`}>
-              <Segment basic>
-                <Header>{name}</Header>
-                <Segment basic>
-                  ${price}  
-                  <br/>
-                  <br/>
-                  {description}
-                </Segment>
-              </Segment>
-            </Link>
+            <Segment basic>
+            <Header>{title}</Header>
+            <Segment basic>
+              {body}
+              <br/>
+              <br/>
+              Rating: {rating} Stars
+            </Segment>
+            </Segment>
             }
         </StyledSegment>
       </StyledGrid>
@@ -47,4 +44,4 @@ class Item extends React.Component {
 
 }
 
-export default Item
+export default Comment

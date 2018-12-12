@@ -43,7 +43,7 @@ class Items extends React.Component {
 
   renderItems = () => {
     return this.state.items.map( i => (
-      <Item {...i} handleedit={this.handleEdit} handledelete={this.handleDelete}/>
+      <Item key={i.id} {...i} handleedit={this.handleEdit} handledelete={this.handleDelete}/>
     )
     )
   }

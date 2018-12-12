@@ -41,7 +41,7 @@ class Departments extends React.Component {
 
   renderDepartments = () => {
     return this.state.departments.map( d => (
-      <Department {...d} handleedit={this.handleEdit} handledelete={this.handleDelete}/>
+      <Department key={d.id} {...d} handleedit={this.handleEdit} handledelete={this.handleDelete}/>
     )
     )
   }

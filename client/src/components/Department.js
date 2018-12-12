@@ -1,5 +1,5 @@
 import React from "react"
-import {Segment, Header, Button, Icon, Grid} from "semantic-ui-react"
+import {Segment, Header, Button, Icon,} from "semantic-ui-react"
 import { Link, } from "react-router-dom";
 import DepartmentForm from "./DepartmentForm";
 import {StyledSegment, StyledGrid, Segment2} from "./styles/main"
