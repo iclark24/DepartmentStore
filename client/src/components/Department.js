@@ -19,10 +19,10 @@ class Department extends React.Component {
       <StyledGrid>
         <StyledSegment textAlign="center">
           <Segment basic style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <Button icon size="mini" color="orange" onClick={() => this.toggleEdit()}>
+            <Button inverted icon size="mini" color="orange" onClick={() => this.toggleEdit()}>
               <Icon name="pencil"/>
             </Button>
-            <Button icon size="mini" color="red" onClick={() => handledelete(id)}>
+            <Button inverted icon size="mini" color="red" onClick={() => handledelete(id)}>
               <Icon name="trash"/>
             </Button>
           </Segment>

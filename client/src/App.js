@@ -11,8 +11,6 @@ import ItemForm from "./components/ItemForm"
 import {Container} from "semantic-ui-react"
 import Comments from "./components/Comments"
 import CommentForm from "./components/CommentForm"
-// import Products from './components/Products';
-
 
 const App = () => (
   <Fragment>
