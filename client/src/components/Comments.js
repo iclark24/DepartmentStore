@@ -67,7 +67,7 @@ componentDidMount() {
           <Options>
             
             <div>{this.renderComments()}</div>
-            <PHIBlock/>
+            <PHIBlock>Placeholder for image.</PHIBlock>
           </Options>
         </div>
 
