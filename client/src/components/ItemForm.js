@@ -39,7 +39,7 @@ class ItemForm extends React.Component {
   render() {
     const { name, price, description } = this.state;
     return (
-      <Segment padded>
+      <Segment basic padded>
         {this.props.id?
           <Header>Edit Item</Header>
           :

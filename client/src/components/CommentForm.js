@@ -72,7 +72,14 @@ class CommentForm extends React.Component {
               </Form.Field>
               <Form.Field>
                 <label>Rating:</label>
-                <Rating maxRating={5} icon="star" size="huge" value={rating} onRate={this.handleRate} />
+                <Rating 
+                  maxRating={5} 
+                  name="rating" 
+                  icon="star" 
+                  size="huge" 
+                  value={rating} 
+                  onRate={this.handleRate} 
+                />
               </Form.Field>
               <Button color="green">Submit</Button>
             </Form>
@@ -103,7 +110,14 @@ class CommentForm extends React.Component {
           </Form.Field>
           <Form.Field>
             <label>Rating:</label>
-            <Rating maxRating={5} icon="star" size="huge" value={rating} onRate={this.handleRate} />
+            <Rating 
+              maxRating={5} 
+              name="rating" 
+              icon="star" 
+              size="huge" 
+              value={rating} 
+              onRate={this.handleRate} 
+            />
           </Form.Field>
           <Button color="green">Submit</Button>
         </Form>

@@ -3,7 +3,7 @@ import { Button, Icon, Grid, Header} from "semantic-ui-react"
 import axios from "axios"
 import { Link, } from "react-router-dom";
 import Comment from "./Comment"
-import {SDiv, Content} from "./styles/main"
+import {SDiv, Options, PHIBlock} from "./styles/main"
 
 class Comments extends React.Component {
 
@@ -64,7 +64,11 @@ componentDidMount() {
           <Header as="h2" textAlign="center">${price}</Header>
           <Header as="h3" textAlign="center">{description}</Header>
         </SDiv>
-            {this.renderComments()}
+          <Options>
+            
+            <div>{this.renderComments()}</div>
+            <PHIBlock/>
+          </Options>
         </div>
 
 

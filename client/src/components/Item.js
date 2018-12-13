@@ -30,12 +30,10 @@ class Item extends React.Component {
             :
             <Link to={`/items/${id}`}>
               <Segment2 basic>
-                <Header>{name}</Header>
+                <Header as="h1">{name}</Header>
                 <Segment basic>
-                  ${price}  
-                  <br/>
-                  <br/>
-                  {description}
+                <Header as="h2">${price}</Header>
+                  <Header as="h3">{description}</Header>
                 </Segment>
               </Segment2>
             </Link>

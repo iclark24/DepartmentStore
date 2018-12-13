@@ -39,7 +39,7 @@ class DepartmentForm extends React.Component {
   render() {
     const { name } = this.state;
     return (
-      <Segment padded>
+      <Segment basic padded>
         {this.props.id?
               <Header>Edit Department</Header>
             :

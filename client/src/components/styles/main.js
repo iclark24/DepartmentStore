@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {Segment, Grid, Container} from "semantic-ui-react"
+import {Segment, Grid, Menu} from "semantic-ui-react"
 
 
 const side = (side) => {
@@ -39,6 +39,12 @@ const color = (color) =>{
     return 'grey';
   }
 }
+
+export const SMenu = styled(Menu) `
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+`
 
 export const StyledSegment = styled(Segment)`
   margin: 50px;
@@ -87,6 +93,17 @@ export const Button = styled.div`
   width: 40px;
   border-radius: ${props => side(props.side)};
 `
+
+export const PHIBlock = styled.div `
+  height: 500px;
+  width: 300px;
+  background: grey;
+  border: 2px solid black;
+  position: fixed;
+  right: 400px;
+
+`
+
 export const Options = styled.div`
   display: flex;
   justify-content: space-between;  
@@ -103,6 +120,7 @@ export const SDiv = styled.div`
   box-shadow: 10px 10px rgba(128, 128, 128, .5);
   margin: 0 auto 20px auto;
   padding-bottom: 20px;
+  margin-top: 20px;
 `
 
 export const BGround = styled.div`
