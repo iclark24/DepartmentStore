@@ -3,6 +3,7 @@ import { Button, Icon, Grid, Header} from "semantic-ui-react"
 import axios from "axios"
 import { Link, } from "react-router-dom";
 import Comment from "./Comment"
+import {SDiv, Content} from "./styles/main"
 
 class Comments extends React.Component {
 
@@ -50,18 +51,21 @@ componentDidMount() {
 
   render() {
     const {id} = this.props.match.params
+    const {name, price, description} = this.state.item
     return(
       <div>
         <Link to={`/items/${id}/comments/new`}>
-          <Button style={{ marginBottom: "30px"}} color="blue">
+          <Button style={{ marginBottom: "30px"}} color="green">
             <Icon name="plus"/>New Comment
           </Button>
         </Link>
-        <Header as="h1" textAlign="center">{this.state.item.name}</Header>
-        <Grid columns={3} centered>
+        <SDiv>
+          <Header as="h1" textAlign="center">{name}</Header>
+          <Header as="h2" textAlign="center">${price}</Header>
+          <Header as="h3" textAlign="center">{description}</Header>
+        </SDiv>
             {this.renderComments()}
-        </Grid>
-      </div>
+        </div>
 
 
     )

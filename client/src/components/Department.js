@@ -1,8 +1,8 @@
 import React from "react"
-import {Segment, Header, Button, Icon,} from "semantic-ui-react"
+import {Segment, Header,  Icon,} from "semantic-ui-react"
 import { Link, } from "react-router-dom";
 import DepartmentForm from "./DepartmentForm";
-import {StyledSegment, StyledGrid, Segment2} from "./styles/main"
+import { StyledGrid, Segment2, SDiv, Button, Options,} from "./styles/main"
 
 
 class Department extends React.Component {
@@ -17,25 +17,27 @@ class Department extends React.Component {
     const {id, name, handleedit, handledelete, } = this.props
     return (
       <StyledGrid>
-        <StyledSegment textAlign="center">
-          <Segment basic style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <Button inverted icon size="mini" color="orange" onClick={() => this.toggleEdit()}>
-              <Icon name="pencil"/>
+        <SDiv talign="center">
+          <Options>
+            <Button side="topleft" color="orange" onClick={() => this.toggleEdit()}>
+              <Icon size="large" color="blue" name="pencil"/>
             </Button>
-            <Button inverted icon size="mini" color="red" onClick={() => handledelete(id)}>
-              <Icon name="trash"/>
+            <Button side="topright" color="red" onClick={() => handledelete(id)}>
+              <Icon size="large" name="trash"/>
             </Button>
-          </Segment>
-            {this.state.editing?
+          </Options>
+              {this.state.editing?
               <DepartmentForm {...this.props} toggleEdit={this.toggleEdit} handleEdit={handleedit}/>
             :
-            <Link to={`/departments/${id}`}>
-              <Segment2 basic>
-                <Header>{name}</Header>
-              </Segment2>
-            </Link>
+            
+              <Link to={`/departments/${id}`}>
+                <Segment2 basic>
+                  <Header>{name}</Header>
+
+                </Segment2>
+              </Link>
             }
-        </StyledSegment>
+        </SDiv>
       </StyledGrid>
     )
   }

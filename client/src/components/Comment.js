@@ -1,6 +1,6 @@
 import React from "react"
-import {Segment, Header, Button, Icon,} from "semantic-ui-react"
-import {StyledSegment, StyledGrid} from "./styles/main"
+import {Rating, Header, Icon,} from "semantic-ui-react"
+import { SItem, Button, Options, Content} from "./styles/main"
 import CommentForm from "./CommentForm"
 
 class Comment extends React.Component {
@@ -14,31 +14,32 @@ class Comment extends React.Component {
   render() {
     const {id, title, body, rating, handleedit, handledelete, } = this.props
     return (
-      <StyledGrid>
-        <StyledSegment textAlign="center">
-          <Segment basic style={{ display: "flex", alignComments: "center", justifyContent: "space-between" }}>
-            <Button inverted icon size="mini" color="orange" onClick={() => this.toggleEdit()}>
-              <Icon name="pencil"/>
+        <SItem>
+          <Options>
+            <Button side="topleft" color="orange" onClick={() => this.toggleEdit()}>
+              <Icon size="large" color="blue" name="pencil"/>
             </Button>
-            <Button inverted icon size="mini" color="red" onClick={() => handledelete(id)}>
-              <Icon name="trash"/>
+            <Header as="h2">{title}</Header>
+            <Button side="topright" color="red" onClick={() => handledelete(id)}>
+              <Icon size="large" name="trash"/>
             </Button>
-          </Segment>
+          </Options>
             {this.state.editing?
               <CommentForm {...this.props} toggleEdit={this.toggleEdit} handleEdit={handleedit}/>
             :
-            <Segment basic>
-            <Header>{title}</Header>
-            <Segment basic>
+            <div>
+
+            <Content>
               {body}
-              <br/>
-              <br/>
-              Rating: {rating} Stars
-            </Segment>
-            </Segment>
-            }
-        </StyledSegment>
-      </StyledGrid>
+
+            </Content>            
+            <Content>
+              <Rating rating={rating} icon="star" size="huge" disabled maxRating={5} />
+            </Content>
+            </div>
+          }
+
+        </SItem>
     )
   }
 

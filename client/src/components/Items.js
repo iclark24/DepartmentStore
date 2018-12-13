@@ -53,7 +53,7 @@ class Items extends React.Component {
     return(
       <div>
         <Link to={`/departments/${id}/items/new`}>
-          <Button style={{ marginBottom: "30px"}} color="blue">
+          <Button style={{ marginBottom: "30px"}} color="green">
             <Icon name="plus"/>New Item
           </Button>
         </Link>

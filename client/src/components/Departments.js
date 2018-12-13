@@ -50,7 +50,7 @@ class Departments extends React.Component {
     return(
       <div>
         <Link to="/departments/new">
-          <Button style={{ marginBottom: "30px"}} color="blue">
+          <Button style={{ marginBottom: "30px"}} color="green">
             <Icon name="plus"/>New Department
           </Button>
         </Link>

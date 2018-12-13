@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
-import {Button, Form, Segment, Header} from "semantic-ui-react"
+import {Button, Form, TextArea, Header, Rating} from "semantic-ui-react"
+import {SDiv, Content} from "./styles/main"
+
 
 class CommentForm extends React.Component {
   state = { title: "", body: "", rating: ""};
@@ -16,6 +18,9 @@ class CommentForm extends React.Component {
     const { target: { name, value, } } = e;
     this.setState({ [name]: value, });
   }
+
+  handleRate = (e, { rating }) => this.setState({ rating })
+
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -39,38 +44,72 @@ class CommentForm extends React.Component {
   render() {
     const { title, body, rating } = this.state;
     return (
-      <Segment padded>
+      <div>
         {this.props.id?
-              <Header>Edit Comment</Header>
-            :
-        <Header>New Comment</Header>
-        }
+          <div>
+            <Header>Edit Comment</Header>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Field>
+                <label>Title</label>
+                <input
+                  name="title"
+                  placeholder="Comment Title"
+                  value={title}
+                  onChange={this.handleChange}
+                  required
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>Comment</label>
+                <TextArea
+                  name="body"
+                  placeholder="Comment Body"
+                  value={body}
+                  onChange={this.handleChange}
+                  required
+                  autoHeight
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>Rating:</label>
+                <Rating maxRating={5} icon="star" size="huge" value={rating} onRate={this.handleRate} />
+              </Form.Field>
+              <Button color="green">Submit</Button>
+            </Form>
+          </div>
+        :
+          <SDiv>
+          <Header>New Comment</Header>
         <Form onSubmit={this.handleSubmit}>
-          <Form.Input
+          <Form.Field>
+            <label>Title</label>
+            <input
             name="title"
             placeholder="Comment Title"
             value={title}
             onChange={this.handleChange}
-            required
-            />
-          <Form.TextArea
-            name="body"
-            placeholder="Comment Body"
-            value={body}
-            onChange={this.handleChange}
-            required
-            />
-          <Form.Input
-            name="rating"
-            placeholder="Rating"
-            value={rating}
-            type="number"
-            onChange={this.handleChange}
-            required
-            />
+            required/>
+          </Form.Field>
+          <Form.Field>
+            <label>Comment</label>
+            <TextArea
+              name="body"
+              placeholder="Comment Body"
+              value={body}
+              onChange={this.handleChange}
+              required
+              autoHeight
+              />
+          </Form.Field>
+          <Form.Field>
+            <label>Rating:</label>
+            <Rating maxRating={5} icon="star" size="huge" value={rating} onRate={this.handleRate} />
+          </Form.Field>
           <Button color="green">Submit</Button>
         </Form>
-      </Segment>
+      </SDiv>
+            }
+      </div>
     )
   }
 }

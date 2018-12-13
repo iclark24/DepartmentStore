@@ -1,4 +1,4 @@
-import React, { Fragment, } from 'react';
+import React from 'react';
 import { Route, Switch, } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
@@ -11,9 +11,11 @@ import ItemForm from "./components/ItemForm"
 import {Container} from "semantic-ui-react"
 import Comments from "./components/Comments"
 import CommentForm from "./components/CommentForm"
+import {BGround} from "./components/styles/main"
 
 const App = () => (
-  <Fragment>
+  <>
+  <BGround>
     <Navbar/>
     <Container>
       <Switch>
@@ -28,7 +30,8 @@ const App = () => (
         <Route component={NoMatch} />
       </Switch>
     </Container>
-  </Fragment>
+  </BGround>
+    </>
 );
 
 export default App;
